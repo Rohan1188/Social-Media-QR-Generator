@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Generate branded, scannable QR codes for your Facebook, Instagram, TikTok, and LinkedIn profiles.">
+<meta name="theme-color" content="#171512">
+<title>Social QR Studio — Branded profile QR codes</title>
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23171512'/%3E%3Crect x='5' y='5' width='6' height='6' fill='%23fff'/%3E%3Crect x='13' y='5' width='6' height='6' fill='%23fff'/%3E%3Crect x='5' y='13' width='6' height='6' fill='%23fff'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <h1>Social QR Studio</h1>
+      <p>Turn any profile link into a scannable card, styled for the platform it belongs to.</p>
+    </div>
+    <div class="tag">4 templates · PNG export</div>
+  </header>
+
+  <main class="grid">
+
+    <!-- controls -->
+    <form class="panel" id="controlsForm" onsubmit="return false;">
+
+      <fieldset class="field-group">
+        <legend>Platform</legend>
+        <div class="platform-grid" id="platformGrid" role="tablist" aria-label="Choose a platform template"></div>
+      </fieldset>
+
+      <fieldset class="field-group">
+        <legend>Profile details</legend>
+
+        <div class="field">
+          <label for="nameInput">Display name</label>
+          <div class="input-row">
+            <input id="nameInput" type="text" placeholder="e.g. Maya Chen" maxlength="40" autocomplete="off">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="userInput">Username</label>
+          <div class="input-row">
+            <span class="prefix" aria-hidden="true">@</span>
+            <input id="userInput" type="text" placeholder="mayachen" maxlength="30" autocomplete="off">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="linkInput">Profile link</label>
+          <div class="input-row">
+            <input id="linkInput" type="url" placeholder="https://instagram.com/mayachen" inputmode="url" autocomplete="off">
+          </div>
+          <p class="hint" id="linkHint">This is what the QR code will open when scanned.</p>
+        </div>
+      </fieldset>
+
+      <button class="download-btn" id="downloadBtn" type="button" disabled aria-describedby="linkHint">
+        Download card
+      </button>
+    </form>
+
+    <!-- preview -->
+    <section class="stage" aria-label="Card preview">
+      <div class="card instagram" id="card">
+        <div class="badge-row">
+          <div class="badge-icon" id="badgeIcon" aria-hidden="true"></div>
+          <div class="badge-word" id="badgeWord">Instagram</div>
+        </div>
+
+        <div class="qr-zone" aria-live="polite">
+          <div class="qr-box">
+            <div id="qr-canvas-holder"></div>
+          </div>
+        </div>
+
+        <div class="identity">
+          <p class="name" id="cardName">Your name</p>
+          <p class="handle" id="cardHandle">@yourusername</p>
+        </div>
+
+        <div class="footer-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+          <span id="cardLink">Add a profile link to generate</span>
+        </div>
+
+        <div class="empty-note" id="emptyNote">Add a profile link on the left to generate the QR code</div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<noscript>
+  <p style="padding:24px;font-family:sans-serif;">Social QR Studio needs JavaScript enabled to generate QR codes.</p>
+</noscript>
+
+<script src="script.js" defer></script>
+
+</body>
+</html>
