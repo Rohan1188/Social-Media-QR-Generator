@@ -11,6 +11,7 @@
   --ig-1:#FEDA75;     --ig-2:#FA7E1E;    --ig-3:#D62976;   --ig-4:#962FBF;   --ig-5:#4F5BD5;
   --tt-cyan:#25F4EE;  --tt-pink:#FE2C55; --tt-black:#000000;
   --li:#0A66C2;       --li-deep:#00335C;
+  --go-blue:#4285F4;  --go-red:#EA4335;  --go-yellow:#FBBC05; --go-green:#34A853;
 
   --focus-ring: 0 0 0 3px rgba(23,21,18,.15);
 }
@@ -26,8 +27,8 @@ body{
 }
 
 ::selection{ background:var(--ink); color:#fff; }
-
 a{ color:inherit; }
+.hidden{ display:none !important; }
 
 .wrap{
   max-width:1180px;
@@ -64,6 +65,34 @@ a{ color:inherit; }
   border-radius:100px;
   white-space:nowrap;
 }
+
+/* ---------- mode tabs ---------- */
+.mode-tabs{
+  display:inline-flex;
+  gap:4px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:5px;
+  margin-bottom:28px;
+}
+.mode-tab{
+  border:none;
+  background:transparent;
+  padding:10px 18px;
+  border-radius:9px;
+  font-family:inherit;
+  font-size:13.5px;
+  font-weight:700;
+  color:var(--muted);
+  cursor:pointer;
+  transition:background .15s ease, color .15s ease;
+}
+.mode-tab:hover{ color:var(--ink); }
+.mode-tab.active{ background:var(--ink); color:#fff; }
+.mode-tab:focus-visible{ outline:none; box-shadow:var(--focus-ring); }
+
+.mode-panel.hidden{ display:none !important; }
 
 .grid{
   display:grid;
@@ -128,6 +157,38 @@ a{ color:inherit; }
 .platform-btn.active[data-p="instagram"]{ border-color:var(--ig-3); background:#FDECF3; }
 .platform-btn.active[data-p="tiktok"]{ border-color:var(--tt-black); background:var(--tt-black); color:#fff; }
 .platform-btn.active[data-p="linkedin"]{ border-color:var(--li); background:#EAF1FB; }
+.platform-btn.active[data-p="google"]{ border-color:var(--go-blue); background:#EAF1FE; }
+
+/* ---------- segmented toggle (Website / App) ---------- */
+.segmented{
+  display:flex;
+  gap:4px;
+  background:var(--paper);
+  border:1.5px solid var(--line);
+  border-radius:12px;
+  padding:4px;
+}
+.seg-btn{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  border:none;
+  background:transparent;
+  padding:9px 10px;
+  border-radius:9px;
+  font-family:inherit;
+  font-size:13px;
+  font-weight:600;
+  color:var(--muted);
+  cursor:pointer;
+  transition:background .15s ease, color .15s ease;
+}
+.seg-btn svg{ width:15px; height:15px; flex:none; }
+.seg-btn:hover{ color:var(--ink); }
+.seg-btn.active{ background:var(--ink); color:#fff; }
+.seg-btn:focus-visible{ outline:none; box-shadow:var(--focus-ring); }
 
 .field{ margin-bottom:18px; }
 .field:last-child{ margin-bottom:0; }
@@ -176,6 +237,89 @@ a{ color:inherit; }
 }
 
 .hint{ font-size:12px; color:var(--muted); margin-top:6px; }
+.optional-tag{ font-weight:400; text-transform:none; color:var(--muted); }
+
+.visually-hidden{
+  position:absolute;
+  width:1px; height:1px;
+  overflow:hidden;
+  clip:rect(0 0 0 0);
+  white-space:nowrap;
+}
+
+.textarea-row{ align-items:flex-start; }
+.field textarea{
+  width:100%;
+  border:none;
+  background:transparent;
+  padding:11px 13px;
+  font-family:inherit;
+  font-size:14.5px;
+  color:var(--ink);
+  outline:none;
+  resize:vertical;
+  min-height:70px;
+}
+.field textarea::placeholder{ color:#B7B1A4; }
+
+.avatar-upload-row{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.avatar-preview{
+  width:52px; height:52px;
+  border-radius:50%;
+  flex:none;
+  background:linear-gradient(135deg, var(--go-blue), var(--ig-3));
+  display:flex; align-items:center; justify-content:center;
+  color:#fff;
+  font-weight:800;
+  font-size:18px;
+  overflow:hidden;
+  border:1px solid var(--line);
+}
+.avatar-preview img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+.avatar-upload-actions{ display:flex; align-items:center; gap:10px; }
+.upload-btn-wrap{ display:flex; }
+.upload-btn{
+  display:inline-flex;
+  align-items:center;
+  padding:9px 14px;
+  border-radius:10px;
+  border:1.5px solid var(--line);
+  background:var(--paper);
+  font-size:13px;
+  font-weight:600;
+  color:var(--ink);
+  cursor:pointer;
+  transition:border-color .15s ease, background .15s ease;
+}
+.upload-btn:hover{ border-color:var(--ink); }
+.remove-btn{
+  border:none;
+  background:transparent;
+  color:var(--danger);
+  font-size:12.5px;
+  font-weight:600;
+  cursor:pointer;
+  padding:4px 2px;
+}
+.remove-btn:hover{ text-decoration:underline; }
+
+.counts-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:10px;
+}
+.counts-grid .field{ margin-bottom:0; }
+.counts-grid input[type="number"]::-webkit-outer-spin-button,
+.counts-grid input[type="number"]::-webkit-inner-spin-button{
+  -webkit-appearance:none;
+  margin:0;
+}
+.counts-grid input[type="number"]{ -moz-appearance:textfield; }
 
 .download-btn{
   width:100%;
@@ -243,6 +387,17 @@ a{ color:inherit; }
   font-size:15px;
   font-weight:800;
   letter-spacing:-0.01em;
+}
+.type-pill{
+  margin-left:auto;
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  padding:5px 9px;
+  border-radius:100px;
+  background:rgba(255,255,255,.18);
+  white-space:nowrap;
 }
 
 .qr-zone{
@@ -338,6 +493,30 @@ a{ color:inherit; }
 .card.tiktok::before{ background:var(--tt-cyan); top:-60px; left:-60px; }
 .card.tiktok::after{ background:var(--tt-pink); bottom:-60px; right:-60px; }
 
+/* ---------- Google card: light theme (Google uses white surfaces, not a brand gradient) ---------- */
+.card.google{
+  background:#FFFFFF;
+  color:var(--ink);
+  border:1px solid #EEF0F2;
+}
+.card.google .badge-icon{ background:#F1F3F4; }
+.card.google .badge-word{ color:var(--ink); }
+.card.google .type-pill{ background:#F1F3F4; color:#5F6368; }
+.card.google .identity .handle{ opacity:.6; color:#5F6368; }
+.card.google .footer-row{
+  border-top-color:#EEF0F2;
+  color:#5F6368;
+  opacity:1;
+}
+.card.google .qr-box{
+  box-shadow:none;
+  border:1px solid #EEF0F2;
+}
+.card.google .empty-note{
+  background:rgba(255,255,255,.9);
+  color:var(--ink);
+}
+
 .empty-note{
   position:absolute;
   inset:0;
@@ -361,5 +540,254 @@ noscript p{
 
 @media (prefers-reduced-motion: reduce){
   .platform-btn,
-  .download-btn{ transition:none; }
+  .seg-btn,
+  .download-btn,
+  .mode-tab{ transition:none; }
+}
+
+/* =====================================================================
+   POST MOCKUP — feed-style card (Facebook / Instagram / LinkedIn)
+   ===================================================================== */
+.feed-post{
+  width:380px;
+  background:#fff;
+  border-radius:14px;
+  border:1px solid #E4E6EA;
+  box-shadow:0 20px 45px -25px rgba(20,15,10,.4);
+  overflow:hidden;
+  position:relative;
+  font-family:'Inter',sans-serif;
+  color:var(--ink);
+  padding-bottom:6px;
+  display:flex;
+  flex-direction:column;
+}
+
+/* Default (Facebook / LinkedIn) reading order: header, caption, photo, engagement, actions */
+.post-header{ order:1; }
+.post-caption{ order:2; }
+.post-image-wrap{ order:3; }
+.ig-actions{ order:4; }
+.engagement-summary{ order:5; }
+.ig-comments-link{ order:6; }
+.text-actions{ order:7; }
+
+/* Instagram reading order: header, photo, icons, likes, caption, comments link */
+.feed-post[data-platform="instagram"] .post-header{ order:1; }
+.feed-post[data-platform="instagram"] .post-image-wrap{ order:2; }
+.feed-post[data-platform="instagram"] .ig-actions{ order:3; }
+.feed-post[data-platform="instagram"] .engagement-summary{ order:4; }
+.feed-post[data-platform="instagram"] .post-caption{ order:5; padding-top:0; }
+.feed-post[data-platform="instagram"] .ig-comments-link{ order:6; }
+.feed-post[data-platform="instagram"] .text-actions{ order:7; }
+
+.mockup-watermark{
+  position:absolute;
+  top:10px; right:10px;
+  z-index:5;
+  background:rgba(23,21,18,.72);
+  color:#fff;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  padding:5px 9px;
+  border-radius:100px;
+  pointer-events:none;
+  backdrop-filter:blur(2px);
+}
+
+.post-header{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:14px 16px 10px;
+}
+.avatar{
+  width:42px; height:42px;
+  border-radius:50%;
+  flex:none;
+  background:linear-gradient(135deg, var(--go-blue), var(--ig-3));
+  display:flex; align-items:center; justify-content:center;
+  color:#fff;
+  font-weight:800;
+  font-size:16px;
+  overflow:hidden;
+}
+.avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+.post-meta{ flex:1; min-width:0; }
+.post-name{
+  margin:0;
+  font-size:14.5px;
+  font-weight:700;
+  line-height:1.3;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.post-sub{
+  margin:1px 0 0;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.3;
+}
+.post-menu{
+  color:var(--muted);
+  font-weight:700;
+  font-size:16px;
+  padding:0 4px;
+}
+
+.post-caption{
+  margin:0;
+  padding:2px 16px 12px;
+  font-size:14px;
+  line-height:1.5;
+  white-space:pre-wrap;
+  word-break:break-word;
+}
+
+.post-image-wrap{
+  width:100%;
+  aspect-ratio:1/1;
+  background:#EDEFF2;
+  overflow:hidden;
+}
+.post-image-wrap.hidden{ display:none; }
+.post-image-wrap img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+/* Instagram-only icon row */
+.ig-actions{
+  display:none;
+  align-items:center;
+  gap:14px;
+  padding:12px 16px 4px;
+  color:var(--ink);
+}
+.ig-actions svg{ width:24px; height:24px; }
+.ig-actions .spacer{ flex:1; }
+
+.engagement-summary{
+  margin:0;
+  padding:10px 16px 0;
+  font-size:13px;
+  color:var(--ink);
+  font-weight:600;
+}
+.ig-comments-link{
+  margin:4px 0 0;
+  padding:0 16px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.text-actions{
+  display:flex;
+  border-top:1px solid #EEF0F2;
+  margin-top:10px;
+}
+.text-actions button{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  border:none;
+  background:transparent;
+  padding:10px 4px;
+  font-family:inherit;
+  font-size:13px;
+  font-weight:600;
+  color:var(--muted);
+  cursor:default;
+}
+.text-actions button svg{ width:17px; height:17px; }
+
+/* ---- platform-specific overrides via data-platform ---- */
+.feed-post[data-platform="instagram"] .ig-actions{ display:flex; }
+.feed-post[data-platform="instagram"] .text-actions{ display:none; }
+.feed-post[data-platform="instagram"] .avatar{ border:2px solid #fff; box-shadow:0 0 0 2px var(--ig-3); }
+
+.feed-post[data-platform="facebook"] .text-actions button:nth-child(1){ color:var(--fb); }
+.feed-post[data-platform="linkedin"] .post-header{ align-items:flex-start; }
+.feed-post[data-platform="linkedin"] .avatar{ border-radius:6px; }
+.feed-post[data-platform="linkedin"] .text-actions button{ font-weight:700; }
+
+/* =====================================================================
+   POST MOCKUP — vertical reel card (TikTok)
+   ===================================================================== */
+.reel-post{
+  width:260px;
+  height:462px;
+  border-radius:22px;
+  overflow:hidden;
+  position:relative;
+  background:#111;
+  box-shadow:0 20px 45px -25px rgba(20,15,10,.5);
+}
+.reel-post.hidden{ display:none; }
+
+.reel-image-wrap{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(160deg,#2b2b2e,#0c0c0d);
+}
+.reel-image-wrap img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+.reel-rail{
+  position:absolute;
+  right:10px;
+  bottom:88px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+  z-index:2;
+}
+.reel-avatar{
+  width:40px; height:40px;
+  border-radius:50%;
+  border:2px solid #fff;
+  background:linear-gradient(135deg, var(--go-blue), var(--ig-3));
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-weight:800; font-size:14px;
+  overflow:hidden;
+  margin-bottom:2px;
+}
+.reel-avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+.reel-icon-group{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  color:#fff;
+}
+.reel-icon-group svg{ width:29px; height:29px; }
+.reel-icon-group span{
+  font-size:11.5px;
+  font-weight:700;
+}
+
+.reel-caption{
+  position:absolute;
+  left:14px; right:64px; bottom:16px;
+  z-index:2;
+  color:#fff;
+}
+.reel-name{
+  margin:0 0 4px;
+  font-size:13.5px;
+  font-weight:800;
+}
+.reel-text{
+  margin:0;
+  font-size:12.5px;
+  line-height:1.4;
+  opacity:.92;
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
 }
